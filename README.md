@@ -2,7 +2,7 @@
 MediaContext.js - Add Dynamic contextual backgrounds and elements to your HTML5 Video/Audio players.
 
 # Summary
-MediaContext.js Library is written in Pure Javascript, it allows you to change background or an element based on the time of an HTML5 audio/video element. You also have the possibility to change a element to add some metadata information ... check the demo at https://glinford.github.io/mediacontext.js/
+MediaContext.js Library is written in Pure Javascript, it allows you to change background or/and an element based on the time of an HTML5 audio/video element. Check the demo at https://glinford.github.io/mediacontext.js/
 
 The library is built to be simple to use and light (3kb minimized)
 
