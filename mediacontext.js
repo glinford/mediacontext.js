@@ -71,7 +71,7 @@
         this.mediaElement.addEventListener("canplay", function(){
             this.prepareBackground(function(){
                 this.prepareMetadata(function(){
-                    this.prepareMedia();
+                  this.prepareMedia();
                 }.bind(this));
             }.bind(this));
         }.bind(this));
@@ -82,38 +82,39 @@
       if(!this.backgroundElement){
         callback();
       }
+
+      var doManual = function(){
+        if(this.settings.backgroundContext.manual && this.settings.backgroundContext.manual.length){
+          this.settings.backgroundContext.manual.forEach(function(e){
+            this.imageExists(e.src, function(exists) {
+              if(exists){
+                this.events.background[e.time] = "url('" + e.src + "')";
+              }
+            }.bind(this));
+          }.bind(this));
+        }
+        callback();
+      }.bind(this);
+
       var recurs = function(i){
         if(i <= this.mediaElement.duration) {
-          if(this.settings.backgroundContext.manual && Object.keys(this.settings.backgroundContext.manual).length){
-            this.settings.backgroundContext.manual.every(function(e){
-              if(e.time === i){
-                return this.imageExists(e.src, function(exists) {
-                  if(exists){
-                    this.events.background[i] = "url('" + e.src + "')";
-                  }
-                  recurs(i + 1);
-                  return false;
-                }.bind(this));
-                return false;
-              }
-              return true;
-            }.bind(this));
-          }
-
-          if(this.settings.backgroundContext.folder && this.settings.backgroundContext.folder.path && Object.keys(this.settings.backgroundContext.folder).length === 2){
-            var src = this.settings.backgroundContext.folder.path + this.settings.backgroundContext.folder.pattern.replace("%", i);
-            return this.imageExists(src, function(exists) {
-              if(exists){
-                this.events.background[i] = "url('" + src + "')";
-              }
-              recurs(i + 1);
-            }.bind(this));
-          }
+          var src = this.settings.backgroundContext.folder.path + this.settings.backgroundContext.folder.pattern.replace("%", i);
+          return this.imageExists(src, function(exists) {
+            if(exists){
+              this.events.background[i] = "url('" + src + "')";
+            }
+            recurs(i + 1);
+          }.bind(this));
         } else {
-          callback();
+          doManual();
         }
       }.bind(this);
-      recurs(0);
+
+      if(this.settings.backgroundContext.folder && this.settings.backgroundContext.folder.path && Object.keys(this.settings.backgroundContext.folder).length === 2){
+        recurs(0);
+      } else {
+        doManual();
+      }
     },
 
     prepareMetadata: function(callback){
