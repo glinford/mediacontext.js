@@ -1,6 +1,6 @@
 {
   "name": "mediacontext",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MediaContext.js - Add Dynamic contextual backgrounds and elements to your HTML5 Video/Audio players. ",
   "main": "mediacontext.js",
   "scripts": {
