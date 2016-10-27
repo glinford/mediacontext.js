@@ -1,0 +1,27 @@
+{
+  "name": "mediacontext",
+  "description": "MediaContext.js - Add Dynamic contextual backgrounds and elements to your HTML5 Video/Audio players.",
+  "main": "mediacontext.js",
+  "authors": [
+    "glinford"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "html5",
+    "audio",
+    "context",
+    "media",
+    "mediacontext",
+    "background",
+    "dynamic"
+  ],
+  "homepage": "https://github.com/glinford/mediacontext.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
