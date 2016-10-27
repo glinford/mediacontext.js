@@ -63,13 +63,10 @@
       mediaSelector: ".media-context",
       backgroundSelector: ".media-context-background",
       backgroundContext: {
+        json: {
+          path: "context/background.json"
+        },
         manual: [
-          { src: "backgrounds/bg-0.jpg", time: 0 },
-          { src: "backgrounds/bg-6.jpg", time: 6 },
-          { src: "backgrounds/bg-29.jpg", time: 29 },
-          { src: "backgrounds/bg-34.jpg", time: 34 },
-          { src: "backgrounds/bg-39.jpg", time: 39 },
-          { src: "backgrounds/bg-43.jpg", time: 43 },
           { src: "backgrounds/bg-46.jpg", time: 46 },
           { src: "backgrounds/bg-52.jpg", time: 52 },
         ]
@@ -79,9 +76,9 @@
         json: {
           path: "context/metadata.json"
         },
-        /*manual: [
-          { content: "<h2>This is a manual context</h2>", time: 12 } // Override context metadata json at 12 seconds
-        ]*/
+        manual: [
+          { content: "<h2>This is a manual context</h2>", time: 12 }
+        ]
       }
     });
   </script>

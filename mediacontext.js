@@ -6,6 +6,9 @@
       mediaSelector: ".media-context",
       backgroundSelector: ".media-context-background",
       backgroundContext: {
+        json: {
+          path: null
+        },
         manual: {}
       },
       metadataSelector: ".media-context-metadata",
@@ -89,7 +92,7 @@
     },
 
     prepareBackground: function(callback){
-      if(!this.backgroundElement || !this.settings.backgroundContext.manual || !this.settings.backgroundContext.manual.length){
+      if(!this.backgroundElement){
         callback();
       }
 
@@ -108,7 +111,19 @@
         }
       }.bind(this);
 
-      recurs(0);
+      if(this.settings.backgroundContext.json && this.settings.backgroundContext.json.path){
+        this.loadJSON(this.settings.backgroundContext.json.path, function(response) {
+          var obj_JSON = JSON.parse(response);
+          if(typeof obj_JSON !== 'undefined'){
+            this.settings.backgroundContext.manual = obj_JSON.concat(this.settings.backgroundContext.manual || []);
+            recurs(0);
+          }
+        }.bind(this));
+      } else if(this.settings.backgroundContext.manual.length){
+        recurs(0);
+      } else {
+        callback();
+      }
     },
 
     prepareMetadata: function(callback){
