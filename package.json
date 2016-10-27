@@ -1,0 +1,33 @@
+{
+  "name": "mediacontext",
+  "version": "0.0.1",
+  "description": "MediaContext.js - Add Dynamic contextual backgrounds and elements to your HTML5 Video/Audio players. ",
+  "main": "mediacontext.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glinford/mediacontext.js.git"
+  },
+  "keywords": [
+    "video",
+    "html5",
+    "audio",
+    "context",
+    "media",
+    "mediacontext",
+    "background",
+    "dynamic"
+  ],
+  "author": "glinford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glinford/mediacontext.js/issues"
+  },
+  "homepage": "https://github.com/glinford/mediacontext.js#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}

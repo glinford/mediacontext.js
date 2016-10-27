@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>MediaContext.js - Demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <style type="text/css">
+    .center {
+      margin-left: calc(50vw - 250px);
+      margin-top: calc(50vh - 250px);
+    }
+    .media-context-background {
+      -webkit-transition: background-image 0.4s ease-in-out;
+      transition: background-image 0.4s ease-in-out;
+      background: url('backgrounds/bg-0.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    .media-context-metadata{
+      display:block;
+      outline: 1px solid white;
+      background-color:rgba(0, 0, 0, 0.5);
+      width:500px;
+      height:auto;
+      margin-left: calc(50vw - 250px);
+      opacity: 0;
+      transition: opacity .4s ease-in-out;
+      -moz-transition: opacity .4s ease-in-out;
+      -webkit-transition: opacity .4s ease-in-out;
+    }
+    .description{
+      text-align:center;
+      font-family: 'Oswald', sans-serif;
+      font-size:22px;
+      color:white;
+    }
+
+    .description a{
+      font-size:16px;
+      color: grey;
+    }
+
+    .description a:focus,
+    .description a:hover{
+      color: white;
+    }
+
+    .side-pic{
+      width:auto;
+      height:50px;
+    }
+    </style>
+  </head>
+  <body class="media-context-background">
+      <video class="center media-context" controls="controls" poster="https://i.ytimg.com/vi/YAaYvXdDRw8/maxresdefault.jpg" src="planetearth.mp4" height="282" width="500"></video>
+      <div class="media-context-metadata"></div>
+  </body>
+  <script type="text/javascript" src="mediacontext.min.js"></script>
+  <script>
+    MediaContext({
+      mediaSelector: ".media-context",
+      backgroundSelector: ".media-context-background",
+      backgroundContext: {
+        folder: {
+          path: "backgrounds/",
+          pattern: "bg-%.jpg"
+        },
+        /*manual: [
+          { src: "backgrounds/bg-lol.png", time: 12 } // Overrige background at 12 seconds
+        ]*/
+      },
+      metadataSelector: ".media-context-metadata",
+      metadataContext: {
+        json: {
+          path: "https://api.myjson.com/bins/364uu"
+        },
+        /*manual: [
+          { content: "<h2>This is a manual context</h2>", time: 12 } // Override context metadata json at 12 seconds
+        ]*/
+      }
+    });
+  </script>
+</html>
