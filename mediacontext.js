@@ -6,10 +6,6 @@
       mediaSelector: ".media-context",
       backgroundSelector: ".media-context-background",
       backgroundContext: {
-        folder: {
-          path: null,
-          pattern: null
-        },
         manual: {}
       },
       metadataSelector: ".media-context-metadata",
@@ -42,6 +38,20 @@
       metadata: []
     },
     settings: null,
+    cssString: '',
+
+    preLoadBackgrounds: function(){
+      var css = 'body:after{position:absolute; width:0; height:0; overflow:hidden; z-index:-1;content: ' + this.cssString + ';}',
+      head = document.head || document.getElementsByTagName('head')[0],
+      style = document.createElement('style');
+      style.type = 'text/css';
+      if (style.styleSheet){
+        style.styleSheet.cssText = css;
+      } else {
+        style.appendChild(document.createTextNode(css));
+      }
+      head.appendChild(style);
+    },
 
     imageExists: function(url, callback) {
         var img = new Image();
@@ -79,42 +89,26 @@
     },
 
     prepareBackground: function(callback){
-      if(!this.backgroundElement){
+      if(!this.backgroundElement || !this.settings.backgroundContext.manual || !this.settings.backgroundContext.manual.length){
         callback();
       }
-
-      var doManual = function(){
-        if(this.settings.backgroundContext.manual && this.settings.backgroundContext.manual.length){
-          this.settings.backgroundContext.manual.forEach(function(e){
-            this.imageExists(e.src, function(exists) {
-              if(exists){
-                this.events.background[e.time] = "url('" + e.src + "')";
-              }
-            }.bind(this));
-          }.bind(this));
-        }
-        callback();
-      }.bind(this);
 
       var recurs = function(i){
-        if(i <= this.mediaElement.duration) {
-          var src = this.settings.backgroundContext.folder.path + this.settings.backgroundContext.folder.pattern.replace("%", i);
-          return this.imageExists(src, function(exists) {
+        if(i < this.settings.backgroundContext.manual.length){
+          var e = this.settings.backgroundContext.manual[i];
+          this.imageExists(e.src, function(exists) {
             if(exists){
-              this.events.background[i] = "url('" + src + "')";
+              this.cssString += 'url(' + e.src + ') ';
+              this.events.background[e.time] = "url('" + e.src + "')";
             }
-            recurs(i + 1);
+            return recurs(i + 1);
           }.bind(this));
         } else {
-          doManual();
+          callback();
         }
       }.bind(this);
 
-      if(this.settings.backgroundContext.folder && this.settings.backgroundContext.folder.path && Object.keys(this.settings.backgroundContext.folder).length === 2){
-        recurs(0);
-      } else {
-        doManual();
-      }
+      recurs(0);
     },
 
     prepareMetadata: function(callback){
@@ -162,6 +156,7 @@
           }
         }
       }.bind(this));
+      this.preLoadBackgrounds();
     }
   }
 
