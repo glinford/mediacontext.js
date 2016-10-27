@@ -7,8 +7,8 @@
       backgroundSelector: ".media-context-background",
       backgroundContext: {
         folder: {
-          path: "backgrounds",
-          pattern: "out%.png"
+          path: null,
+          pattern: null
         },
         manual: {}
       },
@@ -100,7 +100,7 @@
             }.bind(this));
           }
 
-          if(this.settings.backgroundContext.folder && Object.keys(this.settings.backgroundContext.folder).length === 2){
+          if(this.settings.backgroundContext.folder && this.settings.backgroundContext.folder.path && Object.keys(this.settings.backgroundContext.folder).length === 2){
             var src = this.settings.backgroundContext.folder.path + this.settings.backgroundContext.folder.pattern.replace("%", i);
             return this.imageExists(src, function(exists) {
               if(exists){
