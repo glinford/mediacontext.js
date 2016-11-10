@@ -20,7 +20,7 @@ bower install mediacontext
 git clone https://github.com/glinford/mediacontext.js
 ```
 
-# Demo
+# Demo (Best in Chrome)
 https://glinford.github.io/mediacontext.js/
 
 # Usage/Example
